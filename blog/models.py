@@ -17,10 +17,6 @@ class Author(models.Model):
         return self.full_name()
 
 
-    class Meta:
-        verbose_name_plural = "Authors"
-
-
 class Tag(models.Model):
     caption = models.CharField(max_length=25)
 
@@ -32,7 +28,7 @@ class Tag(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=150)
     excerpt = models.CharField(max_length=250)
-    image_name = models.CharField(max_length=150)
+    image = models.ImageField(upload_to="images", null=True)
     date = models.DateField(auto_now=True)
     slug = models.SlugField(unique=True, db_index=True)
     content = models.TextField()
@@ -47,3 +43,10 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+
+class Comment(models.Model):
+    user_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    text = models.TextField(max_length=400)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
