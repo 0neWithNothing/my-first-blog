@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'my_site.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Feel free to alter this value to suit your needs.
-        default='postgres://django_blog_wc5k_user:ZyYxqELoqx4pq2tmDtey4DYegMkCj1wq@dpg-cfmd66ta499591e2ph1g-a.frankfurt-postgres.render.com/django_blog_wc5k',
+        default=getenv("DATABASE_URL"),
         conn_max_age=600
     )
 }
